@@ -1,0 +1,173 @@
+/**index.wxss**/
+Page {
+  height: 100%;
+}
+
+swiper {
+  height: 100%;
+}
+
+.panel-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.globle {
+  flex: 3 1 200rpx;
+  background-color: #dcdcdc;
+  display: block;
+  width: 100%;
+}
+
+.globle-grid {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 33.33% 33.33% 33.33%;
+}
+
+.globle-grid-item,
+.context-grid-item {
+  position: relative;
+  background-color: #ffffff;
+  margin-right: 1rpx;
+}
+
+.globle-grid-item {
+  margin-top: 1rpx;
+}
+
+.context-grid-item {
+  margin-bottom: 1rpx;
+}
+
+/* 点击按钮效果 */
+.globle-grid-item:active,
+.context-grid-item:active {
+  background-color: #eeeeee66;
+}
+
+.context {
+  flex: 4 1 200rpx;
+  display: block;
+  background-color: #dcdcdc;
+  width: 100%;
+}
+
+.context-grid {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 25% 25% 25% 25%;
+}
+
+.center {
+  position: relative;
+  height: 62rpx;
+  background-color: #e2e6e7;
+}
+
+.profile-name {
+  margin-left: 24rpx;
+  line-height: 62rpx;
+  font-size: 32rpx;
+}
+
+.globle-point-group,
+.context-point-group {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.globle-point,
+.context-point {
+  float: left;
+  width: 12rpx;
+  height: 12rpx;
+  margin: 6rpx;
+  border-radius: 50%;
+  background-color: #bcc2c5;
+}
+
+.globle-point-active,
+.context-point-active {
+  background-color: #414d57;
+}
+
+.globle-point-group {
+  top: 6rpx;
+}
+
+.context-point-group {
+  bottom: 6rpx;
+}
+
+.icon {
+  width: 80rpx;
+  height: 80rpx;
+  margin-bottom: 12rpx;
+}
+
+.icon-text {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24rpx;
+  text-align: center;
+}
+
+/* 总高度64rpx */
+.isLock {
+  display: block;
+  position: absolute;
+  right: 24rpx;
+  width: 48rpx;
+  height: 48rpx;
+  top: 8rpx;
+}
+
+.tools {
+  display: flex;
+  align-items: center;
+  height: 64rpx;
+  background-color: #e2e6e7;
+}
+
+.volumeImage,
+.panel {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+.volumeImage {
+  margin-left: 24rpx;
+}
+
+.panel {
+  margin-right: 24rpx;
+}
+
+.slider {
+  margin: 0 32rpx;
+  padding: 0;
+  flex-grow: 1;
+  height: 35rpx;
+}
+
+.progress {
+  position: relative;
+  height: 100%;
+}
+
+.progress image {
+  position: absolute;
+  width: 218px;
+  height: 149px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

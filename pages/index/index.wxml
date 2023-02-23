@@ -1,0 +1,49 @@
+<view class="panel-container">
+  <view class="tools">
+    <image src="{{volumeImage}}" class="volumeImage" bindtap="toggleMute"></image>
+    <slider class="slider" value="{{volume}}" bindchanging="volumeChange" block-size="20" backgroundColor="#8e8e8e" step="2"></slider>
+    <image src="/assets/panel.png" class="panel" bindtap="mainWindow"></image>
+  </view>
+  <view class="globle">
+    <swiper current="{{globalPageIndex}}" bindchange="changeGloblePage">
+      <block wx:for="{{globalPageCount}}">
+        <swiper-item>
+          <view class="globle-grid">
+            <view class="globle-grid-item" bindtap="butonClick" data-index="{{item.Index}}" wx:for="{{globleButton[index]}}">
+              <view class="icon-text">
+                <image src="{{item.IconFileName}}" class="icon"></image>
+                <view wx:if="{{item.Label}}"> {{item.Label}}</view>
+              </view>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="center">
+    <view class="profile-name">{{profileName}}</view>
+    <view class="globle-point-group">
+      <view class="globle-point {{index==globalPageIndex?'globle-point-active':''}}" wx:for="{{globalPageCount}}"> </view>
+    </view>
+    <view class="context-point-group">
+      <view class="context-point {{index==contextPageIndex?'context-point-active':''}}" wx:for="{{contextPageCount}}"> </view>
+    </view>
+    <image class="isLock" src="{{isContextPanelLocked?'/assets/lock.png':'/assets/unlock.png'}}" bindtap="lockTap"></image>
+  </view>
+  <view class="context">
+    <swiper current="{{contextPageIndex}}" bindchange="changeContextPage">
+      <block wx:for="{{contextPageCount}}">
+        <swiper-item>
+          <view class="context-grid">
+            <view class="context-grid-item" bindtap="butonClick" data-index="{{item.Index}}" wx:for="{{contextButton[index]}}">
+              <view class="icon-text">
+                <image src="{{item.IconFileName}}" class="icon"></image>
+                <view wx:if="{{item.Label}}"> {{item.Label}}</view>
+              </view>
+            </view>
+          </view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>

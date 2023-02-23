@@ -1,0 +1,35 @@
+/* pages/scan/index.wxss */
+button {
+  font-weight: normal;
+}
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 38%;
+  transform: translate(-50%, -50%);
+}
+
+.scan {
+  margin-top: 50rpx;
+}
+
+.history {
+  margin-top: 60rpx;
+}
+
+.logo {
+  width: 300rpx;
+  height: 300rpx;
+  margin: 0 auto;
+  display: block;
+}
+
+.guide-text {
+  position: absolute;
+  bottom: 0;
+  font-size: small;
+  color: lightgray;
+  white-space: pre-wrap;
+  margin: 40rpx 24rpx;
+}

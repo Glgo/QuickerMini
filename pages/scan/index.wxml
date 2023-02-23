@@ -1,0 +1,6 @@
+<view class="center">
+  <image class="logo" src="/assets/logo.png"></image>
+  <button type="primary" bindtap="scan" class="scan">扫码</button>
+  <button type="primary" bindtap="goHistory" class="history" wx:if="{{showHistory}}">上次登录历史</button>
+</view>
+<pre class="guide-text">{{guideText}}</pre>

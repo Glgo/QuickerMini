@@ -1,0 +1,18 @@
+{
+  "pages": [
+    "pages/scan/index",
+    "pages/index/index",
+    "pages/push/push"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "Quicler",
+    "navigationBarTextStyle": "black",
+    "homeButton": false,
+    "pageOrientation": "portrait"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "resizable": false
+}

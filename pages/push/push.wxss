@@ -1,0 +1,32 @@
+.email-code {
+  margin: 20rpx;
+}
+
+.input-push {
+  overflow: hidden;
+}
+.input-push {
+  margin: 20rpx;
+}
+.input-action {
+  display: inline-block;
+  padding: 12rpx 0;
+}
+.add {
+  float: right;
+  width: auto !important;
+}
+
+.email {
+  margin-right: 15rpx;
+}
+
+.m-buttons {
+  margin: 30rpx auto;
+  width: 90%;
+}
+
+.minibutton {
+  margin-right: 10rpx;
+  text-align: center;
+}
