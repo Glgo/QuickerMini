@@ -1,0 +1,10 @@
+<view class="button-container">
+  <view class="button" wx:for="{{buttons}}" bindtap="buttonTap" capture-bind:longpress="buttonLongPress" data-index="{{index}}" data-name="{{item.name}}">
+    <view class="button-item" data-index="{{index}}" hover-class="hover">
+      <view class="button-text">{{item.name}}</view>
+    </view>
+  </view>
+</view>
+<view style="padding: 24rpx;">
+  <button type="primary" bindtap="newButton">添加按钮</button>
+</view>

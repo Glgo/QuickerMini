@@ -1,4 +1,4 @@
-const encoding = require('../../text-encoding/index');
+const encoding = require('text-encoding');
 const constant = require('../../utils/constants')
 const command = require('../../utils/command')
 var tcpSocket = null
@@ -75,7 +75,7 @@ Page({
 
     // 监听接收到数据事件
     tcpSocket.onMessage(function (result) {
-      let decoder = new encoding.TextDecoder();
+      let decoder = new encoding.TextDecoder('utf8');
       //获取arraybuffer
       const buffer = result.message;
       if (buffer.byteLength < 12) {
@@ -136,6 +136,7 @@ Page({
   parseData: function (type, data) {
     try {
       const message = JSON.parse(data);
+      console.log(message)
       const messageType = message.MessageType;
       switch (messageType) {
         case constant.updateButtonMessageType: //更新按钮
@@ -189,9 +190,7 @@ Page({
     } catch (error) {}
   },
   backToScan: function () {
-    wx.reLaunch({
-      url: '/pages/scan/index',
-    });
+    wx.navigateBack();
   },
   updateButtons: function (buttons, message) {
     let globleButtons = [];
@@ -203,7 +202,6 @@ Page({
           const style = split[0].toLocaleLowerCase()
           const name = split[1].replace(/([a-z])([A-Z]+)/g, "$1-$2").toLocaleLowerCase();
           const src = `https://files.getquicker.net/fa/5.15.3/svgs/${style}/${name}.svg`
-          console.log(element.Label,element.IconFileName, src)
           element.IconFileName = src;
         }
       }
@@ -274,7 +272,7 @@ function sendMessage(msgObj) {
       const messageType = msgObj.messageType;
       const message = JSON.stringify(msgObj);
       // 创建一个 ArrayBuffer 对象
-      let array = new encoding.TextEncoder().encode(message);
+      let array = new encoding.TextEncoder('utf8').encode(message);
       const buffer = new ArrayBuffer(array.length + 16);
 
       const view = new DataView(buffer);
@@ -290,8 +288,6 @@ function sendMessage(msgObj) {
       tcpSocket.write(buffer);
     } catch (error) {}
   } else {
-    wx.reLaunch({
-      url: '/pages/scan/index',
-    });
+    wx.navigateBack();
   }
 }

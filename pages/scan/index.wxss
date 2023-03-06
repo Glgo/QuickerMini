@@ -1,8 +1,4 @@
 /* pages/scan/index.wxss */
-button {
-  font-weight: normal;
-}
-
 .center {
   position: absolute;
   left: 50%;

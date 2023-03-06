@@ -1,13 +1,21 @@
-<view class="email-code">
-  <button class="email" bindtap="setEmail" size="mini">邮箱</button>
-  <button class="code" bindtap="setCode" size="mini">验证码</button>
+<view class="socket-container">
+  <button bindtap="connectSocket" class="connectSocket" type="default" size="mini">{{connectSocketButtonText}}</button>
+  <text class="connectStateText {{textActive}}">{{connectState}}</text>
+  <view class="connectState {{stateActive}}"></view>
 </view>
-<view class="input-push">
-  <input class="input-action" type="text" auto-focus placeholder="输入动作名称" model:value="{{inputAction}}" />
-  <button type="primary" class="add" bindtap="addAction">添加动作</button>
+<view class="small-text">常用功能（操作剪贴板）</view>
+<view class="common-buttons">
+  <view class="common-button" bindtap="copy">复制</view>
+  <view class="common-button" bindtap="paste">发送到窗口</view>
+  <view class="common-button" bindtap="open">打开网址</view>
 </view>
-<view style="font-size: 18rpx;display: block;text-align: end;padding-right: 24rpx;">长按删除动作</view>
-<view id="buttons" class="m-buttons">
-  <button class="minibutton" size="mini" wx:for="{{buttons}}" bindtap="pushTap"
-  bindlongtap="longTap" data-action="{{item}}">{{item}}</button>
+<view class="add-page-parent">
+  <button size="mini" type="default" class="add-page" bindtap="addPage">+ 添加页面</button>
+</view>
+<view class="page-container">
+  <view class="page" wx:for="{{pages}}">
+    <view class="page-item center-flex" data-index="{{index}}" data-name='{{item.name}}' data-id='{{item.id}}' capture-bind:longpress="removePage" bindtap="pageDetail">
+      {{item.name}}
+    </view>
+  </view>
 </view>

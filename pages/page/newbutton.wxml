@@ -1,0 +1,32 @@
+<!--pages/page/newbutton.wxml-->
+<view class="operate-container">
+  <view class="title">操作方式</view>
+  <view class="line"></view>
+  <radio-group class="radio-group" bindchange="operationChange">
+    <radio class="operation" wx:for="{{operation}}" value="{{index}}">{{item}}</radio>
+  </radio-group>
+  <view class="title">输入方式</view>
+  <view class="line"></view>
+  <radio-group class="radio-group" bindchange="inputTypeChange">
+    <radio class="operation" disabled="{{operationValue!='action'&&index == 'noparam'}}" checked="{{(index=='noparam')&&typeChecked}}" wx:for="{{inputType}}" value="{{index}}">{{item}}</radio>
+  </radio-group>
+</view>
+<view class="button-name" wx:if="{{operationValue&&operationValue!='action'}}">
+  <view class="line"></view>
+  <view class="label">按钮名称</view>
+  <input class="input" model:value="{{buttonName}}" placeholder="请输入按钮名称" />
+</view>
+<view class="action-name" wx:if="{{operationValue=='action'}}">
+  <view class="line"></view>
+  <view class="label">动作名称</view>
+  <input class="input" model:value="{{actionName}}" placeholder="请输入动作名称" />
+</view>
+<view class="data" wx:if="{{inputTypeValue=='fixed'}}">
+  <view class="line"></view>
+  <view class="label">固定参数</view>
+  <input class="input" model:value="{{fixedData}}" placeholder="请输入固定参数" />
+</view>
+
+<view class='new-button'>
+  <button bindtap="newButton" type="primary">新建</button>
+</view>

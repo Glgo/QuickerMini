@@ -30,7 +30,7 @@ Page({
               const ip = split[1]
               const port = split[2]
               const code = split[3]
-              wx.reLaunch({
+              wx.navigateTo({
                 url: `../index/index?ip=${ip}&port=${port}&code=${code}`,
               })
             }
@@ -47,7 +47,7 @@ Page({
   goHistory: function (event) {
     const that = this;
     this.checkWifiConnect(function () {
-      wx.reLaunch({
+      wx.navigateTo({
         url: `../index/index?ip=${that.data.ip}&port=${that.data.port}&code=${that.data.code}`
       })
     })

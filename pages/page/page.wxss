@@ -1,0 +1,44 @@
+Page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.button-container {
+  overflow: auto;
+  height: 100%;
+  margin: 24rpx 24rpx 0;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.button {
+  height: 140rpx;
+  width: 25%;
+}
+
+.button-item {
+  overflow: hidden;
+  margin-right: 1rpx;
+  flex-direction: column;
+  height: 138rpx;
+  background-color: #ee82ee75;
+  border-radius: 8rpx;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 8rpx;
+  justify-content: center;
+}
+
+.button-text {
+  font-size: 22rpx;
+  padding: 12rpx 8rpx;
+}
+
+.hover {
+  background-color: #ee82eeb0;
+}

@@ -1,32 +1,115 @@
-.email-code {
-  margin: 20rpx;
+@import "/lib/common.wxss";
+
+Page {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.input-push {
-  overflow: hidden;
-}
-.input-push {
-  margin: 20rpx;
-}
-.input-action {
-  display: inline-block;
-  padding: 12rpx 0;
-}
-.add {
-  float: right;
-  width: auto !important;
+.socket-container {
+  display: flex;
+  align-items: center;
 }
 
-.email {
-  margin-right: 15rpx;
+.connectSocket,
+.connectStateText,
+.connectState {
+  margin: 0;
+  flex: 0, 0, 100rpx;
 }
 
-.m-buttons {
-  margin: 30rpx auto;
-  width: 90%;
+.connectSocket,
+.connectStateText {
+  margin-left: 24rpx;
+  font-size: small;
+  color: #cccccc;
 }
 
-.minibutton {
-  margin-right: 10rpx;
+.connectState {
+  width: 10rpx;
+  height: 10rpx;
+  margin-left: 10rpx;
+  background-color: #cccccc;
+  border-radius: 20rpx;
+}
+
+.connectState.active {
+  background-color: #07c160;
+}
+
+.connectStateText.active {
+  color: #07c160;
+}
+
+.small-text {
+  margin: 24rpx;
+  color: #999999
+}
+
+.common-buttons {
+  display: grid;
+  grid-template-columns: 33.33% 33.33% 33.33%;
+  margin: 12rpx 24rpx;
+}
+
+.common-button {
+  display: flex;
+  padding: 12rpx;
   text-align: center;
+  margin: 4rpx;
+  font-weight: 580;
+  border: 1rpx #17a742 solid;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+  color: #17a742;
+  justify-content: center;
+  align-items: center;
+}
+
+.common-button:active {
+  background-color: #eeeeee;
+}
+
+.page-container {
+  flex-grow: 1;
+  border: 1rpx solid #f1f1f1;
+  border-radius: 4rpx;
+  margin: 24rpx;
+}
+
+.add-page-parent {
+  margin: 0 24rpx;
+}
+
+.add-page {
+  float: right;
+  text-align: right;
+  padding: 12rpx;
+  margin: 4rpx;
+  border-radius: 12rpx;
+  font-size: 26rpx;
+}
+
+.page-container {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  background-color: #fafafa;
+}
+
+.page {
+  width: 25%;
+}
+
+.page-item {
+  height: 120rpx;
+  background-color: #ff6666;
+  margin: 4rpx;
+  padding: 8rpx;
+  color: white;
+  text-align: center;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  overflow: hidden;
+  word-wrap: break-word;
 }

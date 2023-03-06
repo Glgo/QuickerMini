@@ -1,16 +1,42 @@
 {
   "pages": [
+    "pages/push/push",
+    "pages/page/page",
+    "pages/page/newbutton",
     "pages/scan/index",
-    "pages/index/index",
-    "pages/push/push"
+    "pages/setting/setting",
+    "pages/index/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "Quicler",
     "navigationBarTextStyle": "black",
-    "homeButton": false,
     "pageOrientation": "portrait"
+  },
+  "tabBar": {
+    "selectedColor": "#1296db",
+    "color": "#8a8a8a",
+    "list": [
+      {
+        "pagePath": "pages/scan/index",
+        "text": "面板",
+        "iconPath": "assets/ic_panel.png",
+        "selectedIconPath": "assets/ic_panel_select.png"
+      },
+      {
+        "pagePath": "pages/push/push",
+        "text": "自定义",
+        "iconPath": "assets/ic_custom.png",
+        "selectedIconPath": "assets/ic_custom_select.png"
+      },
+      {
+        "pagePath": "pages/setting/setting",
+        "text": "配置",
+        "iconPath": "assets/ic_setting.png",
+        "selectedIconPath": "assets/ic_setting_select.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",

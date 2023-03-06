@@ -1,0 +1,22 @@
+{
+  "name": "quicker",
+  "version": "1.0.0",
+  "description": "Quicker小程序端",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Glgo/QuickerMini.git"
+  },
+  "author": "Oak",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Glgo/QuickerMini/issues"
+  },
+  "homepage": "https://github.com/Glgo/QuickerMini#readme",
+  "dependencies": {
+    "text-encoding": "^0.7.0"
+  }
+}

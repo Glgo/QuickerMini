@@ -1,0 +1,30 @@
+.small-text {
+  font-size: small;
+  color: #333333
+}
+
+.center-absolute {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  padding: 12rpx;
+  margin: 0 24rpx;
+  border: #666666 solid 1rpx;
+  border-radius: 12rpx;
+  font-size: 28rpx;
+}
+.label {
+  margin: 24rpx;
+  font-size: 28rpx;
+  color: #333333;
+}

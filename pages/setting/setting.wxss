@@ -1,0 +1,32 @@
+@import "/lib/weui.wxss";
+
+.center {
+  position: absolute;
+  top: 40%;
+  width: 100%;
+}
+
+/* 
+.set-item {
+    padding: 24rpx;
+    width: 100%;
+    border-top: 1rpx #cccccc solid;
+}
+
+.set-item:last-child {
+    border-bottom: 1rpx #cccccc solid;
+}
+
+.set-item:active {
+    background-color: #eeeeee;
+} */
+.set-item {
+  margin-bottom: 32rpx;
+}
+
+.input {
+  border: 1rpx #eeeeee solid;
+  border-radius: 4rpx;
+  padding: 12rpx 24rpx;
+  margin: 12rpx 0;
+}
