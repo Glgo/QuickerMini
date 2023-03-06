@@ -24,7 +24,7 @@
 .guide-text {
   position: absolute;
   bottom: 0;
-  font-size: small;
+  font-size: 28rpx;
   color: lightgray;
   white-space: pre-wrap;
   margin: 40rpx 24rpx;

@@ -1,9 +1,9 @@
 {
   "pages": [
+    "pages/scan/index",
     "pages/push/push",
     "pages/page/page",
     "pages/page/newbutton",
-    "pages/scan/index",
     "pages/setting/setting",
     "pages/index/index"
   ],

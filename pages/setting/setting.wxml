@@ -1,12 +1,12 @@
 <view class="center">
-  <button type="primary" class="set-item" bindtap="setPush">设置推送配置</button>
+  <!-- <button type="primary" class="set-item" bindtap="setPush">设置推送配置</button> -->
   <button type="primary" class="set-item" bindtap="setSocket">设置WebSocket</button>
-  <modal title="推送配置" bindconfirm="savePush" hidden="{{pushHidden}}" bindcancel="hidden">
+  <!-- <modal title="推送配置" bindconfirm="savePush" hidden="{{pushHidden}}" bindcancel="hidden">
     <text>邮箱</text>
     <input class="input" model:value="{{email}}" bindinput="bindInput" />
     <text>验证码</text>
     <input class="input" model:value="{{pushCode}}" password="true" bindinput="bindInput" />
-  </modal>
+  </modal> -->
   <modal title="WebSocket配置" bindconfirm="saveSocket" hidden="{{socketHidden}}" bindcancel="hidden">
     <text>IP地址</text>
     <input class="input" model:value="{{ip}}" bindinput="bindInput" />
