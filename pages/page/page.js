@@ -3,7 +3,6 @@ const util = require("../../utils/util")
 const socketUtil = require("../../utils/socket-util")
 let id; //id就是button的key,存储到本地
 var socketTask;
-let isShow = false;
 Page({
   data: {
     buttons: []
@@ -15,8 +14,10 @@ Page({
       util.showErrorToast("初始化失败");
       wx.navigateBack();
       return
-    }
-    socketTask.onMessage(this.onMessage)
+    };
+    socketTask.onClose(() => {
+      wx.navigateBack();
+    });
     wx.setNavigationBarTitle({
       title: options.name,
     });
@@ -31,8 +32,7 @@ Page({
       }
     });
   },
-  onMessage: (listener) => {
-    if (!isShow) return;
+  onMessage: function (listener) {
     const result = listener.data;
     //   {
     //     "replyTo": 0,
@@ -56,7 +56,7 @@ Page({
                 if (res.confirm) {
                   wx.setClipboardData({
                     data: data,
-                    success:()=>{
+                    success: () => {
                       util.showSuccessToast('复制成功');
                     }
                   })
@@ -68,15 +68,11 @@ Page({
       } catch (error) {}
     }
   },
-  onShow: () => {
-    isShow = true;
+  onShow() {
+    getApp.onMessage = this.onMessage
   },
-  onHide: () => {
-    isShow = false;
-  },
-  onUnload: () => {
-    socketTask = null;
-    isShow = false;
+  onUnload() {
+    getApp.onMessage = null;
   },
   newButton(event) {
     wx.navigateTo({
@@ -99,7 +95,7 @@ Page({
   buttonTap(event) {
     const index = event.currentTarget.dataset.index;
     const button = this.data.buttons[index];
-    socketUtil.convertButonToMsg(socketTask, button);
+    socketUtil.pushButonToMsg(socketTask, button);
   },
   buttonLongPress(event) {
     const index = event.currentTarget.dataset.index;

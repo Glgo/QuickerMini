@@ -57,12 +57,16 @@ Page({
     }
     if (operationValue == 'action') {
       const actionName = this.data.actionName
+      const buttonName = this.data.buttonName
+      if (!buttonName) {
+        buttonName = actionName;
+      }
       if (!actionName) {
         util.showErrorToast('请输入动作名称');
         return;
       }
       const button = {
-        "name": actionName,
+        "name": buttonName,
         "icon": "",
         "operation": operationValue,
         "action": actionName,

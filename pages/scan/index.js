@@ -1,10 +1,11 @@
 // pages/scan/index.js
 const constant = require('../../utils/constants')
+const util = require('../../utils/util')
 Page({
   data: {
     guideText: constant.guideText
   },
-  onLoad: function (option) {
+  onShow: function (option) {
     const ip = wx.getStorageSync(constant.ipKey);
     if (!ip) return
     const port = wx.getStorageSync(constant.portKey);
@@ -19,7 +20,7 @@ Page({
     }
   },
   scan: function (event) {
-    this.checkWifiConnect(function () {
+    util.isWifiConnected(function () {
       wx.scanCode({
         onlyFromCamera: true,
         scanType: ["qrCode"],
@@ -46,40 +47,17 @@ Page({
   },
   goHistory: function (event) {
     const that = this;
-    this.checkWifiConnect(function () {
+    util.isWifiConnected(function () {
       wx.navigateTo({
         url: `../index/index?ip=${that.data.ip}&port=${that.data.port}&code=${that.data.code}`
       })
     })
   },
-  checkWifiConnect: function (successCallback) {
-    successCallback();
-    // wx.startWifi({
-    //   success(res) {
-    //     wx.getConnectedWifi({
-    //       success: result => {
-    //         console.log(result)
-    //         successCallback()
-    //       },
-    //       fail: res => {
-    //         console.log(res)
-    //         wx.showToast({
-    //           title: res.errMsg,
-    //           icon: "error"
-    //         })
-    //       }
-    //     })
-    //   },
-    //   fail(){
-    //     successCallback()
-    //   }
-    // })
-  },
   onShareAppMessage: function () {
     return {
       title: 'Quicker',
       path: '/pages/scan/index',
-      imageUrl:'/assets/share_image.png'
+      imageUrl: '/assets/share_image.png'
     }
   }
 })

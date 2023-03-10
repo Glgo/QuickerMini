@@ -1,4 +1,5 @@
-export const convertButonToMsg = function (socketTask, button) {
+// 点击按钮发送推送内容
+export const pushButonToMsg = function (socketTask, button) {
   button.messageType = 2;
   button.wait = true;
   switch (button.type) {

@@ -5,15 +5,17 @@
   <radio-group class="radio-group" bindchange="operationChange">
     <radio class="operation" wx:for="{{operation}}" value="{{index}}">{{item}}</radio>
   </radio-group>
-  <view class="title">输入方式</view>
+  <view>
+    <view class="title">输入方式</view>
+  </view>
   <view class="line"></view>
   <radio-group class="radio-group" bindchange="inputTypeChange">
     <radio class="operation" disabled="{{operationValue!='action'&&index == 'noparam'}}" checked="{{(index=='noparam')&&typeChecked}}" wx:for="{{inputType}}" value="{{index}}">{{item}}</radio>
   </radio-group>
 </view>
-<view class="button-name" wx:if="{{operationValue&&operationValue!='action'}}">
+<view class="button-name">
   <view class="line"></view>
-  <view class="label">按钮名称</view>
+  <view class="label">显示名称（如果为动作则可以不填，默认为动作名称）</view>
   <input class="input" model:value="{{buttonName}}" placeholder="请输入按钮名称" />
 </view>
 <view class="action-name" wx:if="{{operationValue=='action'}}">

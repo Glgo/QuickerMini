@@ -13,6 +13,20 @@ export const showToast = function (msg) {
 export const showSuccessToast = function (msg) {
   wx.showToast({
     title: msg,
-    icon:'success'
+    icon: 'success'
+  })
+}
+export const isWifiConnected = (connect, disConnect = () => showErrorToast('请连接WiFi')) => {
+  wx.getNetworkType({
+    success(res) {
+      if ('wifi' == res.networkType) {
+        connect();
+      } else {
+        disConnect();
+      }
+    },
+    fail() {
+      disConnect();
+    }
   })
 }

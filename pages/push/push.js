@@ -4,7 +4,9 @@ const util = require('../../utils/util')
 var socketTask = null;
 let reConnect = true; //断开自动连接
 let pageMaxId;
-let isShow = false;
+let ip;
+let port;
+let code;
 Page({
   data: {
     connectState: "未连接",
@@ -58,7 +60,6 @@ Page({
     })
   },
   onShow: function () {
-    isShow = true;
     let that = this;
     wx.getStorage({
       key: constant.pushEmailKey,
@@ -74,12 +75,6 @@ Page({
       }
     });
   },
-  onHide: () => {
-    isShow = false;
-  },
-  onUnload: () => {
-    isShow = false;
-  },
   copy(event) {
     this.commonPush("copy");
   },
@@ -90,33 +85,26 @@ Page({
     this.commonPush('open');
   },
   commonPush(operation) {
-    const that = this;
-    wx.getClipboardData({
-      success(res) {
-        if (res.data) {
-          that.data.pushData.operation = operation;
-          that.data.pushData.data = res.data;
-        } else {
-          that.sendMessage(that.data.pushData)
-          util.showToast("获取剪贴 板失败");
+    if (this.checkConnetedSocket()) {
+      const that = this;
+      wx.getClipboardData({
+        success(res) {
+          if (res.data) {
+            that.data.pushData.operation = operation;
+            that.data.pushData.data = res.data;
+            that.sendMessage(that.data.pushData)
+          } else {
+            util.showToast("获取剪贴 板失败");
+          }
         }
-      }
-    })
+      })
+    } else {
+      util.showErrorToast('未连接');
+    }
   },
   connectSocket(event) { //连接WebSocket
     const that = this;
-    wx.getNetworkType({
-      success(res) {
-        if ('wifi' == res.networkType) {
-          that.doConnect(event);
-        } else {
-          util.showErrorToast('请连接WiFi');
-        }
-      },
-      fail() {
-        that.doConnect(event);
-      }
-    })
+    util.isWifiConnected(() => that.doConnect(event))
   },
   doConnect(event) {
     if (socketTask && this.data.stateActive) {
@@ -127,10 +115,11 @@ Page({
     const that = this;
     let uri;
     try {
-      const ip = wx.getStorageSync(constant.webSocketIpKey);
+      ip = wx.getStorageSync(constant.webSocketIpKey);
       if (ip) {
-        const port = wx.getStorageSync(constant.webSocketPortKey);
-        const code = wx.getStorageSync(constant.webSocketCodeKey);
+        port = wx.getStorageSync(constant.webSocketPortKey);
+        code = wx.getStorageSync(constant.webSocketCodeKey);
+
         // const ipstr = ip.replaceAll('.', '-'); // 将ip地址中的.替换为-
         // uri = `wss://${ipstr}.lan.quicker.cc:${port}/ws`;
         uri = `ws://${ip}:${port}/ws`
@@ -150,28 +139,13 @@ Page({
               })
             })
           }
-          getApp.socketTask = socketTask;
         });
-        socketTask.onMessage((listener) => {
-          if (!isShow) {
-            return
-          }
-          const data = listener.data
-          console.log(data);
-          const dataObj = JSON.parse(data);
-          if (dataObj.messageType == 6 && dataObj.isSuccess) { //验证成功
-            that.setData({
-              connectState: "已连接",
-              connectSocketButtonText: "断开WebSocket",
-              textActive: "active",
-              stateActive: "active",
-              ip: ip,
-              port: port,
-              socketCode: code
-            })
-          }
+        socketTask.onMessage(res => {
+          this.onMessage(res);
+          if (getApp.onMessage) getApp.onMessage(res)
         });
         socketTask.onError((res) => {
+          1
           that.disconnectSocket();
           socketTask = null;
           getApp.socketTask = null;
@@ -204,32 +178,31 @@ Page({
       stateActive: null,
     })
   },
+  onMessage: function (listener) {
+    const data = listener.data
+    console.log(data);
+    const dataObj = JSON.parse(data);
+    if (dataObj.messageType == 6 && dataObj.isSuccess) { //验证成功
+      this.setData({
+        connectState: "已连接",
+        connectSocketButtonText: "断开WebSocket",
+        textActive: "active",
+        stateActive: "active",
+        ip: ip,
+        port: port,
+        socketCode: code
+      });
+      getApp.socketTask = socketTask;
+    }
+  },
   sendMessage(data) {
-    if (socketTask && this.data.stateActive) {
+    if (this.checkConnetedSocket()) {
       socketTask.send({
         data: JSON.stringify(data)
       });
-    } else if (!data.toUser || !data.code) {
-      util.showToast("未设置邮箱或验证码")
-      return
     } else {
-      wx.request({
-        url: constant.pushUrl,
-        data: data,
-        method: "POST",
-        success: function (res) {
-          console.log("code:" + res.statusCode + "\n" + "data:" + JSON.stringify(res.data));
-          if (!res.data.isSuccess) {
-            let errorMessage = res.data.errorMessage;
-            if (errorMessage) {
-              wx.showToast({
-                title: errorMessage,
-                icon: "error"
-              })
-            }
-          }
-        }
-      })
+      util.showToast("未连接")
+      return
     }
   },
   addPage(event) { //添加页面

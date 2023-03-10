@@ -6,7 +6,6 @@ Page {
 }
 
 .operate-container {
-  padding-top: 24rpx;
   display: block;
   width: 100%;
   font-size: 32rpx;
@@ -15,12 +14,12 @@ Page {
 .line {
   height: 1rpx;
   background-color: #dddddd;
-  margin: 32rpx 24rpx 12rpx;
+  margin: 24rpx 24rpx 0;
 }
 
 .title,
 .radio-group {
-  padding: 0 24rpx;
+  padding: 24rpx 24rpx 0;
 }
 
 .title {
