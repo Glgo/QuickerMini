@@ -8,6 +8,7 @@
   <view class="common-button" bindtap="copy">复制</view>
   <view class="common-button" bindtap="paste">发送到窗口</view>
   <view class="common-button" bindtap="open">打开网址</view>
+  <view class="common-button" bindtap="uploadFile">上传文件</view>
 </view>
 <view class="add-page-parent">
   <button size="mini" type="default" class="add-page" bindtap="addPage">+ 添加页面</button>

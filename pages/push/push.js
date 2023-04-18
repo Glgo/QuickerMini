@@ -84,6 +84,24 @@ Page({
   open(event) {
     this.commonPush('open');
   },
+  async uploadFile(event) { //上传文件
+    if (!this.checkConnetedSocket()) {
+      util.showErrorToast('未连接');
+      return;
+    }
+    const that = this;
+    const res = await wx.chooseMedia({
+      count: 9,
+      mediaType: ['image', 'video'],
+      sourceType: ['album', 'camera'],
+      maxDuration: 30,
+      camera: 'back',
+    })
+    const files = res.tempFiles;
+    for (const filePath of files) {
+      await that.pushFile(filePath.tempFilePath)
+    }
+  },
   commonPush(operation) {
     if (this.checkConnetedSocket()) {
       const that = this;
@@ -195,15 +213,52 @@ Page({
       getApp.socketTask = socketTask;
     }
   },
-  sendMessage(data) {
+  sendMessage(data, success = () => {}, fail = () => {}) {
     if (this.checkConnetedSocket()) {
       socketTask.send({
-        data: JSON.stringify(data)
+        data: JSON.stringify(data),
+        success: success,
+        fail: fail,
+      });
+    } else {
+      util.showToast("未连接")
+      return false;
+    }
+  },
+  sendBinary(binary) { //发送二进制内容
+    if (this.checkConnetedSocket()) {
+      socketTask.send({
+        data: binary
       });
     } else {
       util.showToast("未连接")
       return
     }
+  },
+  async pushFile(filePath) {
+    const that = this;
+    const promise = new Promise(function (resolve) {
+      const fileManager = wx.getFileSystemManager();
+      const binary = fileManager.readFileSync(filePath);
+      const splitPath = filePath.split("/");
+      console.log(splitPath)
+      var msg = {
+        messageType: 2,
+        operation: 'sendfile',
+        serial: 1000,
+        data: splitPath[splitPath.length - 1]
+      };
+      const result = that.sendMessage(msg, () => {
+        that.sendBinary(binary);
+        resolve(true);
+      }, () => {
+        resolve(false)
+      });
+      if (!result) {
+        resolve(false)
+      }
+    });
+    return promise;
   },
   addPage(event) { //添加页面
     wx.showModal({
@@ -263,6 +318,9 @@ Page({
       }
     })
   },
+  /**
+   * @returns true：socket已连接
+   */
   checkConnetedSocket() {
     if (socketTask && this.data.stateActive) {
       return true;

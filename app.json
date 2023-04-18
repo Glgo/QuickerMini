@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/scan/index",
     "pages/push/push",
+    "pages/scan/index",
     "pages/page/page",
     "pages/page/newbutton",
     "pages/setting/setting",
